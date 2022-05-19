@@ -1,0 +1,162 @@
+
+package finchtask4;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
+import java.util.Scanner;
+import edu.cmu.ri.createlab.terk.robot.finch.Finch;
+
+public class finchtask4 {
+public static void main(String[] args) {
+9 | P a g e
+int linevalue;
+int sectionvalue;
+int wheelsp;
+int wheelss;
+Date Date = new Date();
+String strDateFormat = "hh:mm:ss a";
+DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
+String formattedDatestart = dateFormat.format(Date);
+// --------------------
+Finch f = new Finch();
+f.saySomething("The finch is connected now");
+f.saySomething("Welcome to the task 4 zigzag program");
+System.out.println("-------------Welcome to the task 4 ZigZag
+program-------------\n");
+System.out.println("By Muhammad Hamza Farid(1736050)\n");
+// --------------------
+// Creating a new keyboard input
+Scanner inputline = new Scanner(System.in);
+do {
+// Displaying a massage on the screen
+System.out.println("Please enter the length of zigzag line?\n
+");
+System.out.println("Note... minimum 20cm and maximum 80cm\n");
+linevalue = inputline.nextInt();
+} while (!lineValid(linevalue));
+System.out.println("\nYou have entered: " + linevalue + "cm\n");
+// if else of switch
+// --------------------
+Scanner inputsection = new Scanner(System.in);
+do {
+// Displaying a massage on the screen
+System.out.println("Please enter the number of sections?\n ");
+System.out.println("Note... minimum 2 and maximim 10\n");
+sectionvalue = inputsection.nextInt();
+} while (!sectionValid(sectionvalue));
+System.out.println("\nYou have entered: " + sectionvalue + "section
+points\n");
+// --------------------
+Random movement = new Random();
+wheelsp = movement.nextInt(255); // 255 maximum finch speed.
+wheelss = wheelsp;
+System.out.println(wheelss + " is Generated random speed\n");
+// --------------------
+int linev = linevalue;
+double p1 = (double) linev / wheelss * 10000;
+10 | P a g e
+double p2 = (p1);
+int p3 = (int) p2; // time = distance/speed
+// --------------------
+int selection = sectionvalue / 2;
+for (int movement1 = 0; movement1 < selection; movement1++) {
+f.setLED(0, 255, 0);
+f.buzz(1000, 1000);
+f.setWheelVelocities(wheelss, wheelss, p3);
+f.sleep(500);
+f.setWheelVelocities(0, 180,1000);
+f.sleep(500);
+f.setLED(255, 0, 0);
+f.buzz(1500, 1000);
+f.setWheelVelocities(wheelss, wheelss, p3);
+f.sleep(500);
+f.setWheelVelocities(180, 0, 1150);
+f.sleep(500);
+}
+// --------------------
+f.sleep(2000);
+f.setWheelVelocities(180, -80, 300);
+f.sleep(500);
+// --------------------
+for (int movementreverse = 0; movementreverse < selection;
+movementreverse++) {
+f.setLED(255, 0, 0);
+f.buzz(1500, 1000);
+f.setWheelVelocities(wheelss, wheelss, p3);
+f.setWheelVelocities(180, 0, 1000);
+f.sleep(500);
+f.setLED(0, 255, 0);
+f.buzz(1000, 1000);
+f.setWheelVelocities(wheelss, wheelss, p3);
+f.setWheelVelocities(0, 180, 1000);
+f.sleep(500);
+}
+f.sleep(2000);
+f.setWheelVelocities(-80, 180, 300);
+f.sleep(500);
+// --------------------
+f.saySomething(" The zigzag task is now finished, please see
+relationg information on screen");
+f.buzz(523, 100);
+11 | P a g e
+f.sleep(100);
+f.buzz(587, 100);
+f.sleep(100);
+f.buzz(659, 100);
+f.sleep(100);
+f.buzz(698, 100);
+f.sleep(100);
+f.buzz(784, 100);
+f.sleep(100);
+f.buzz(880, 100);
+f.sleep(100);
+f.buzz(988, 100);
+f.sleep(100);
+f.buzz(1047, 100);
+f.sleep(100);
+Date Dateend = new Date();
+String strDateFormatend = "hh:mm:ss a";
+DateFormat dateFormatend = new SimpleDateFormat(strDateFormat);
+String formattedDateend = dateFormat.format(Dateend);
+System.out.println("\n-----Program information-----\n");
+System.out.println("\nlength of each Zigzag line entered: " +
+linevalue + "cm");
+System.out.println("\nSection points entered: " + sectionvalue);
+System.out.println("\nrandam speed genrated by finch:" + wheelss);
+System.out.println("\ntotal length treveled: " + sectionvalue *
+linevalue + "cm");
+System.out.println("\ntraversed" + sectionvalue * 5 +"cm");
+System.out.println("\nStart time: " + formattedDatestart);
+System.out.println("\nEnd time: " + formattedDateend);
+System.out.println("\n\n-----Thank you for runing the zigzag task---
+-");
+}
+// --------------------
+private static boolean lineValid(int linevalue) {
+if (linevalue < 20 || linevalue > 80) {
+System.out.println("------Invalid Input------");
+System.out.println("----Please enter value with in the minimum
+and maximum range,try again----;)\n");
+System.out.println("Length of zigzag line should be between
+20cm to 80cm. e.g. 20,...25,...70,...80\n\n");
+return false;
+} else
+return true;
+}
+// --------------------
+private static boolean sectionValid(int sectionvalue) {
+if (sectionvalue < 2 || sectionvalue > 10 || sectionvalue % 2 == 1)
+{
+System.out.println("------Invalid Input------");
+System.out.println("----Please enter value with in the minimum
+and maximum range,try again----;)\n");
+12 | P a g e
+System.out
+.println("The number of sections should be
+between 2 and 10, and even number e.g. 2,4,6,8,10\n\n");
+return false;
+} else
+return true;
+}
+}
